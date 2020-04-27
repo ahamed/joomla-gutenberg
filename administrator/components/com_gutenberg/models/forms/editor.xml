@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<form>
+    <fieldset name="basic">
+        <field name="id" type="hidden" />
+        <field name="title" type="text" label="JGLOBAL_TITLE" description="JFIELD_TITLE_DESC" class="inputbox" required="true" />
+        <field name="description" type="gutenberg" label="Editor" filter="raw" />
+    </fieldset>
+</form>
+

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.3" type="component" method="upgrade">
+  <name>gutenberg</name>
+  <creationDate>2020-04-27</creationDate>
+  <author>JoomShaper</author>
+  <authorEmail>support@joomshaper.com</authorEmail>
+  <authorUrl>https://www.joomshaper.com</authorUrl>
+  <copyright>Copyright (c) 2010 - 2020 JoomShaper. All rights reserved.</copyright>
+  <license>GNU General Public License version 2 or later</license>
+  <version>1.0</version>
+  <description></description>
+
+  <scriptfile>installer.script.php</scriptfile>
+  
+  <updateservers>
+    <server type="extension" priority="1" name=""></server>
+  </updateservers>
+
+  <install>
+    <sql>
+      <file driver="mysql" charset="utf8">sql/install/mysql/install.sql</file>
+      <file driver="mysql">sql/install/mysql/install.sql</file>
+
+      <file driver="mysqli" charset="utf8">sql/install/mysql/install.sql</file>
+      <file driver="mysqli">sql/install/mysql/install.sql</file>
+    </sql>
+  </install>
+
+  <update>
+		<schemas>
+			<schemapath type="mysql">sql/updates/mysql</schemapath>
+			<schemapath type="mysqli">sql/updates/mysql</schemapath>
+		</schemas>
+	</update>
+
+  <uninstall>
+    <sql>
+      <file driver="mysql" charset="utf8">sql/uninstall/mysql/uninstall.sql</file>
+    </sql>
+  </uninstall>
+
+  <files folder="site">
+    <filename>gutenberg.php</filename>
+    <filename>controller.php</filename>
+    <filename>router.php</filename>
+    
+    <folder>assets</folder>
+    <folder>controllers</folder>
+    <folder>fields</folder>
+    <folder>helpers</folder>
+    <folder>layouts</folder>
+    <folder>models</folder>
+    <folder>views</folder>
+  </files>
+
+  <languages folder="language/site">
+    <language tag="en-GB">en-GB/en-GB.com_gutenberg.ini</language>
+  </languages>
+
+  <administration>
+    <menu>COM_GUTENBERG</menu>
+
+    <files folder="admin">
+      <filename>access.xml</filename>
+      <filename>config.xml</filename>
+      <filename>gutenberg.php</filename>
+      <filename>controller.php</filename>
+
+      <folder>assets</folder>
+      <folder>sql</folder>
+      <folder>tables</folder>
+      <folder>views</folder>
+      <folder>controllers</folder>
+      <folder>models</folder>
+      <folder>helpers</folder>
+    </files>
+
+    <languages folder="language/admin">
+      <language tag="en-GB">en-GB/en-GB.com_gutenberg.ini</language>
+      <language tag="en-GB">en-GB/en-GB.com_gutenberg.sys.ini</language>
+    </languages>
+  </administration>
+</extension>
+    

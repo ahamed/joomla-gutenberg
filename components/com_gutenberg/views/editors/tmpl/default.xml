@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<fields name="params" addfieldpath="/components/com_gutenberg/fields">
+		<fieldset name="basic" label="COM_GUTENBERG_VIEW_MENU_OPTIONS"></fieldset>
+	</fields>
+</metadata>
+    
