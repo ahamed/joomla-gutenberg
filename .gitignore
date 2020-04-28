@@ -27,6 +27,13 @@ plugins/
 templates/
 tmp/
 
+!plugins/
+plugins/*
+!plugins/editors/
+plugins/editors/*
+!plugins/editors/gutenberg/
+plugins/editors/gutenberg/assets/editor/node_modules/
+
 !administrator/
 administrator/*
 !administrator/components/

@@ -3,7 +3,7 @@
     <fieldset name="basic">
         <field name="id" type="hidden" />
         <field name="title" type="text" label="JGLOBAL_TITLE" description="JFIELD_TITLE_DESC" class="inputbox" required="true" />
-        <field name="description" type="gutenberg" label="Editor" filter="raw" />
+        <field name="description" type="editor" label="Editor" filter="raw" />
     </fieldset>
 </form>
 

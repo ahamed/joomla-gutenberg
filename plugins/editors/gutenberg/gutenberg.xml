@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.2" type="plugin" group="editors" method="upgrade">
+	<name>plg_editors_gutenberg</name>
+	<version>1.0.0</version>
+	<creationDate>2020</creationDate>
+	<author>JoomShaper</author>
+	<authorEmail>support@joomshaper.com</authorEmail>
+	<authorUrl>https://joomshaper.com</authorUrl>
+	<copyright>JoomShaper</copyright>
+	<license>GNU</license>
+	<description>PLG_TINY_XML_DESCRIPTION</description>
+	<files>
+		<filename plugin="gutenberg">gutenberg.php</filename>
+		<folder>assets</folder>
+		<folder>language</folder>
+	</files>
+
+	<languages folder="language">
+		<language tag="en-GB">en-GB.plg_editors_gutenberg.ini</language>
+		<language tag="en-GB">en-GB.plg_editors_gutenberg.sys.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="height" type="number" label="Height" description="Height" default="580" />
+			</fieldset>
+		</fields>
+	</config>
+</extension>

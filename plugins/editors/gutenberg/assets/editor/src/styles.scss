@@ -1,0 +1,103 @@
+@import "~@wordpress/base-styles/colors";
+@import "~@wordpress/base-styles/variables";
+@import "~@wordpress/base-styles/mixins";
+@import "~@wordpress/base-styles/breakpoints";
+@import "~@wordpress/base-styles/animations";
+@import "~@wordpress/base-styles/z-index";
+
+@import "~@wordpress/components/build-style/style.css";
+@import "~@wordpress/block-library/build-style/style.css";
+@import "~@wordpress/block-library/build-style/editor.css";
+@import "~@wordpress/block-library/build-style/theme.css";
+@import "~@wordpress/block-editor/build-style/style.css";
+@import "~@wordpress/block-directory/build-style/style.css";
+
+@import "./components/sidebar/styles";
+@import "./components/notices/styles";
+@import "./components/block-editor/styles";
+
+
+#joomla-gutenberg-editor {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 185px;
+
+    .gutenberg-application {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .navbar {
+        width: 100%;
+        height: 60px;
+        // background: #222;
+        display: flex;
+        align-items: center;
+
+    
+        .right-bar {
+            margin-right: 50px;
+            button {
+                margin-right: 10px;
+            }
+        }
+    }
+    .editor-styles-wrapper {
+        height: 100vh;
+    }
+    
+    .editor-board {
+        padding-top: 60px;
+    }
+    
+    .components-drop-zone__provider {
+        height: 100vh;
+    }
+    
+    .block-editor__container .components-navigate-regions {
+        height: 100%;
+    }
+    
+    .edit-post-layout__content {
+        width: calc(100% - 280px);
+    }
+    
+    // .edit-post-sidebar {
+    //     position: fixed;
+    //     z-index: 1;
+    //     top: 135px;
+    //     right: 0;
+    //     bottom: 0;
+    //     width: 280px;
+    //     border: 1px solid #e2e4e7;
+    //     background: #fff;
+    //     color: #555d66;
+    //     height: 100vh;
+    //     overflow-y: scroll;
+    // }
+
+    // .joomla-gutenberg-editor__sidebar {
+    //     top: 135px;
+    //     height: 75vh;
+    //     border: 1px solid #eee;
+    // }
+    
+    .edit-post-layout__content {
+        display: flex;
+        flex-direction: column;
+        min-height: 100%;
+        position: relative;
+        padding-bottom: 50vh;
+        margin-top: 60px;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+
+/** Preview styles */
+.block-editor-block-preview__container {
+    font-size: 10px;
+}
