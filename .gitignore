@@ -1,1 +1,82 @@
-administrator/components/com_gutenberg/assets/editor/node_modules/*
+# Files
+robots.txt.dist
+configuration.php
+/index.php
+htaccess.txt
+LICENSE.txt
+README.txt
+robots.txt
+web.config.txt
+.htaccess
+.history/
+.idea/
+.vscode/
+.DS_Store
+
+# others
+bin/
+cache/
+cli/
+images/
+includes/
+layouts/
+libraries/
+media/
+modules/
+plugins/
+templates/
+tmp/
+
+!administrator/
+administrator/*
+!administrator/components/
+administrator/components/*
+!administrator/components/com_gutenberg/
+!administrator/language/
+administrator/language/*
+!administrator/language/en-GB/
+administrator/language/en-GB/*
+!administrator/language/en-GB/en-GB.com_gutenberg.ini
+!administrator/language/en-GB/en-GB.com_gutenberg.sys.ini
+
+
+components/*
+!components/com_gutenberg/
+
+# Language
+language/*
+!language/en-GB/
+language/en-GB/*
+!language/en-GB/en-GB.com_gutenberg.ini
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# node modules
+*node_modules/
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variables file
+.env
+
+# next.js build output
+.next
