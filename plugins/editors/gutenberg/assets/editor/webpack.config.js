@@ -3,12 +3,11 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
     entry: {
-        editor: './src/index.js',
-        preview: './src/main.js'
+        'joomla-gutenberg': './src/index.js',
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'js/[name].bundle.js',
+        filename: 'js/[name].js',
         publicPath: './dist'
     },
     module: {
@@ -57,7 +56,7 @@ module.exports = {
     plugins: [
         new MiniCssExtractPlugin(
             {
-                filename: "./css/[name].bundle.css",
+                filename: "./css/[name].css",
             }
         ),
     ],

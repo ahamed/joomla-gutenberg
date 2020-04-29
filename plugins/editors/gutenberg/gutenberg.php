@@ -12,6 +12,8 @@ defined('_JEXEC') or die('Restricted access');
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Layout\LayoutHelper;
+use Joomla\CMS\Plugin\CMSPlugin;
 use Joomla\CMS\Uri\Uri;
 
 /**
@@ -19,7 +21,7 @@ use Joomla\CMS\Uri\Uri;
  *
  * @since  1.0
  */
-class PlgEditorGutenberg extends JPlugin
+class PlgEditorGutenberg extends CMSPlugin
 {
 	/**
 	 * Affects constructor behavior. If true, language files will be loaded automatically.
@@ -37,6 +39,14 @@ class PlgEditorGutenberg extends JPlugin
 	protected $modeAlias = array();
 
 	/**
+	 * Loads the application object
+	 *
+	 * @var    JApplicationCms
+	 * @since  3.2
+	 */
+	protected $app = null;
+
+	/**
 	 * Initializes the Editor.
 	 *
 	 * @return  void
@@ -44,88 +54,15 @@ class PlgEditorGutenberg extends JPlugin
 	public function onInit()
 	{
 		HTMLHelper::_('stylesheet',
-			Uri::root() . 'plugins/editors/gutenberg/assets/editor/dist/css/editor.bundle.css',
+			Uri::root() . 'plugins/editors/gutenberg/assets/editor/dist/css/joomla-gutenberg.css',
 			array('version' => 'auto')
 		);
 
 		HTMLHelper::_(
-			'script', Uri::root() . 'plugins/editors/gutenberg/assets/editor/dist/js/editor.bundle.js',
+			'script', Uri::root() . 'plugins/editors/gutenberg/assets/editor/dist/js/joomla-gutenberg.js',
 			array('version' => 'auto'),
 			array('defer' => true)
 		);
-	}
-
-	/**
-	 * Copy editor content to form field.
-	 *
-	 * @param   string  $id  The id of the editor field.
-	 *
-	 * @return  string  Javascript
-	 *
-	 * @deprecated 4.0 Code executes directly on submit
-	 */
-	public function onSave($id)
-	{
-		return sprintf('document.getElementById(%1$s).value = Joomla.editors.instances[%1$s].getValue();', json_encode((string) $id));
-	}
-
-	/**
-	 * Get the editor content.
-	 *
-	 * @param   string  $id  The id of the editor field.
-	 *
-	 * @return  string  Javascript
-	 *
-	 * @deprecated 4.0 Use directly the returned code
-	 */
-	public function onGetContent($id)
-	{
-		return sprintf('Joomla.editors.instances[%1$s].getValue();', $id);
-	}
-
-	/**
-	 * Set the editor content.
-	 *
-	 * @param   string  $id       The id of the editor field.
-	 * @param   string  $content  The content to set.
-	 *
-	 * @return  string  Javascript
-	 *
-	 * @deprecated 4.0 Use directly the returned code
-	 */
-	public function onSetContent($id, $content)
-	{
-		return sprintf('Joomla.editors.instances[%1$s].setValue(%2$s);', json_encode((string) $id), json_encode((string) $content));
-	}
-
-	/**
-	 * Adds the editor specific insert method.
-	 *
-	 * @return  void
-	 *
-	 * @deprecated 4.0 Code is loaded in the init script
-	 */
-	public function onGetInsertMethod()
-	{
-		static $done = false;
-
-		// Do this only once.
-		if ($done)
-		{
-			return true;
-		}
-
-		$done = true;
-
-		JFactory::getDocument()->addScriptDeclaration(
-			"
-			;function jInsertEditorText(text, editor) {
-				Joomla.editors.instances[editor].replaceSelection(text);
-			}
-			"
-		);
-
-		return true;
 	}
 
 	/**
@@ -148,19 +85,61 @@ class PlgEditorGutenberg extends JPlugin
 	public function onDisplay($name, $content, $width, $height, $col, $row, $buttons = true, $id = null, $asset = null, $author = null, $params = array())
 	{
 		$doc = Factory::getDocument();
+
+		$editorId = 'joomla-gutenberg-editor-';
+
+		if (preg_match("#jform\[(.+)\]#", $name))
+		{
+			$parsedName = preg_replace("#jform\[(.+)\]#", "$1", $name);
+		}
+
+		/**
+		 * Prepare blocks for the editor
+		 *
+		 */
+		if (!empty($content))
+		{
+			/**
+			 * If the content is not in the gutenberg style
+			 * then, make it as a HTML block.
+			 * This is for B\C.
+			 *
+			 */
+			$content = html_entity_decode($content);
+
+			if (!preg_match("#^<!--\swp:.+\s+\{?.*\}?\s*-->#", $content))
+			{
+				$content = "<!-- wp:html -->\n" . $content . "\n<!-- /wp:html -->";
+			}
+		}
+
 		$data = array(
 			'id' => $id,
 			'name' => $name,
-			'blocks' => $content
+			'blocks' => $content,
+			'editorId' => 'joomla-gutenberg-editor-' . $parsedName
+		);
+
+		$displayData = array(
+			'id' => $id,
+			'name' => $name,
+			'content' => $content,
+			'width' => $width,
+			'height' => $height,
+			'col' => $col,
+			'row' => $row,
+			'buttons' => $buttons,
+			'asset' => $asset,
+			'author' => $author,
+			'params' => $params,
+			'parsedName' => $parsedName
 		);
 
 		$doc->addScriptOptions('data', $data);
 
-		$output = "<div id='editor-wrapper'>";
-		$output .= "<div id='joomla-gutenberg-editor'>Loading...</div>";
-		$output .= "<input type='hidden' name='{$name}' id='{$id}' value='{$value}' />";
-		$output .= "</div>";
+		$output = array();
+		$output[] = LayoutHelper::render('editors.gutenberg.element', $displayData, __DIR__ . '/layouts');
 
-		return $output;
+		return implode("\n", $output);
 	}
 }

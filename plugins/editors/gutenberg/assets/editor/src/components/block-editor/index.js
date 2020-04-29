@@ -57,29 +57,37 @@ function BlockEditor( { settings: _settings } ) {
 
 		if ( storedBlocks && storedBlocks.length ) {
 			updateBlocks(() => storedBlocks);
-
-			createInfoNotice('Blocks loaded', {
-				type: 'snackbar',
-				isDismissible: true,
-			});
+			/**
+			 * On load editor contents blocks
+			 * set the Joomla editor's instance
+			 */
+			Joomla.editors.instances[options.id] = options.blocks;
 		}
 	}, [] );
 
 	
-	function persistBlocks( newBlocks ) {
-		updateBlocks( newBlocks );
+	function persistBlocks(newBlocks) {
+		updateBlocks(newBlocks);
 
-		console.log(serialize(newBlocks));
-
+		const content = serialize(newBlocks);
 		const input = document.querySelector(`#${options.id}`);
-		input.value = serialize(newBlocks);
+		input.value = content;
+		Joomla.editors.instances[options.id] = content;
+	}
+
+	function onInputChange(newBlocks) {
+		updateBlocks(newBlocks);
+		const content = serialize(newBlocks);
+		const input = document.querySelector(`#${options.id}`);
+		input.value = content;
+		Joomla.editors.instances[options.id] = content;
 	}
 
 	return (
 		<div className="joomla-gutenberg__editor">
 			<BlockEditorProvider
 				value={ blocks }
-				onInput={ updateBlocks }
+				onInput={ onInputChange }
 				onChange={ persistBlocks }
 				settings={ settings }
 			>
