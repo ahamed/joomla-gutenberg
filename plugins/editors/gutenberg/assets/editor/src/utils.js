@@ -3,6 +3,7 @@ import { unregisterBlockType, getBlockTypes } from '@wordpress/blocks';
 
 const options = Joomla.getOptions('data') || {};
 const previewData = Joomla.getOptions('previewData') || {};
+const settings = Joomla.getOptions('settings') || {};
 
 const attachCoreBlocks = () => {
     registerCoreBlocks();
@@ -69,4 +70,4 @@ const htmlEntities = {
     }
 };
 
-export {options, previewData, attachCoreBlocks, htmlEntities};
+export {options, previewData, settings, attachCoreBlocks, htmlEntities};

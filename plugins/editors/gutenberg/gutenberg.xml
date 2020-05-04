@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension version="3.2" type="plugin" group="editors" method="upgrade">
-	<name>plg_editors_gutenberg</name>
+	<name>PLG_EDITORS_GUTENBERG</name>
 	<version>1.0.0</version>
 	<creationDate>2020</creationDate>
 	<author>JoomShaper</author>
@@ -8,11 +8,12 @@
 	<authorUrl>https://joomshaper.com</authorUrl>
 	<copyright>JoomShaper</copyright>
 	<license>GNU</license>
-	<description>PLG_TINY_XML_DESCRIPTION</description>
+	<description>PLG_GUTENBERG_XML_DESCRIPTION</description>
 	<files>
 		<filename plugin="gutenberg">gutenberg.php</filename>
 		<folder>assets</folder>
 		<folder>language</folder>
+		<folder>fields</folder>
 	</files>
 
 	<languages folder="language">
@@ -21,8 +22,11 @@
 	</languages>
 	<config>
 		<fields name="params">
-			<fieldset name="basic">
-				<field name="height" type="number" label="Height" description="Height" default="580" />
+			<fieldset name="basic" addfieldpath="/plugins/editors/gutenberg/fields">
+				<field name="width" type="number" label="PLG_EDITOR_GUTENBERG_MAX_WIDTH" description="PLG_EDITOR_GUTENBERG_MAX_WIDTH_DESC" default="580" />
+				<field name="filesize" type="number" label="PLG_EDITOR_GUTENBERG_FILESIZE" description="PLG_EDITOR_GUTENBERG_FILESIZE_DESC" default="2" />
+				<field name="mimetypes" type="text" label="PLG_EDITOR_GUTENBERG_ALLOWED_MIME" description="PLG_EDITOR_GUTENBERG_ALLOWED_MIME_DESC" hint="e.g: jpg, png, pdf" />
+				<field name="blocks" type="blocktypes" label="PLG_EDITOR_GUTENBERG_ALLOWED_BLOCKS" description="PLG_EDITOR_GUTENBERG_ALLOWED_BLOCKS_DESC" multiple="true" default="all" />
 			</fieldset>
 		</fields>
 	</config>

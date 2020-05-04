@@ -87,10 +87,11 @@ class PlgEditorGutenberg extends CMSPlugin
 		$doc = Factory::getDocument();
 
 		$editorId = 'joomla-gutenberg-editor-';
+		$parsedFieldName = 'note';
 
 		if (preg_match("#jform\[(.+)\]#", $name))
 		{
-			$parsedName = preg_replace("#jform\[(.+)\]#", "$1", $name);
+			$parsedFieldName = preg_replace("#jform\[(.+)\]#", "$1", $name);
 		}
 
 		/**
@@ -117,8 +118,40 @@ class PlgEditorGutenberg extends CMSPlugin
 			'id' => $id,
 			'name' => $name,
 			'blocks' => $content,
-			'editorId' => 'joomla-gutenberg-editor-' . $parsedName
+			'editorId' => $editorId . $parsedFieldName
 		);
+
+		/**
+		 * Max uploading file size.
+		 * Make it bytes from MB
+		 */
+		$mb2byte = 1024 * 1024;
+		$maxFileSize = $this->params->get('filesize', 2);
+		$maxFileSize *= $mb2byte;
+
+		/**
+		 * Allowed MIME types for uploads
+		 * Make it array from coma separated string.
+		 */
+		$allowMimeTypes = $this->params->get('mimetypes', null);
+
+		if (!empty($allowMimeTypes))
+		{
+			$allowMimeTypes = explode(',', trim($allowMimeTypes));
+		}
+		else
+		{
+			$allowMimeTypes = null;
+		}
+
+		$settings = array(
+			'width' => $this->params->get('width', 580),
+			'blocks' => $this->params->get('blocks', []),
+			'maxUploadFileSize' => $maxFileSize,
+			'allowedMimeTypes' => $allowMimeTypes
+		);
+
+		$doc->addScriptOptions('settings', $settings);
 
 		$displayData = array(
 			'id' => $id,
@@ -132,7 +165,7 @@ class PlgEditorGutenberg extends CMSPlugin
 			'asset' => $asset,
 			'author' => $author,
 			'params' => $params,
-			'parsedName' => $parsedName
+			'parsedFieldName' => $parsedFieldName
 		);
 
 		$doc->addScriptOptions('data', $data);
