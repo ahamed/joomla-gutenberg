@@ -1,0 +1,12 @@
+{
+  "name": "joomla-gutenberg",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:ahamed07sajeeb/joomla-gutenberg.git",
+  "author": "ahamed07sajeeb <sajeeb07ahamed@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-zip": "^5.0.1"
+  }
+}

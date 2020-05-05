@@ -18,8 +18,8 @@
 	</files>
 
 	<languages folder="language">
-		<language tag="en-GB">en-GB.plg_editors_gutenberg.ini</language>
-		<language tag="en-GB">en-GB.plg_editors_gutenberg.sys.ini</language>
+		<language tag="en-GB">en-GB/en-GB.plg_editors_gutenberg.ini</language>
+		<language tag="en-GB">en-GB/en-GB.plg_editors_gutenberg.sys.ini</language>
 	</languages>
 	<config>
 		<fields name="params">

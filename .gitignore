@@ -26,6 +26,7 @@ modules/
 plugins/
 templates/
 tmp/
+package/
 
 !plugins/
 plugins/*
