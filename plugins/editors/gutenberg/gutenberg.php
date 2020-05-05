@@ -54,12 +54,12 @@ class PlgEditorGutenberg extends CMSPlugin
 	public function onInit()
 	{
 		HTMLHelper::_('stylesheet',
-			Uri::root() . 'plugins/editors/gutenberg/assets/editor/dist/css/joomla-gutenberg.css',
+			Uri::root() . 'plugins/editors/gutenberg/assets/css/joomla-gutenberg-editor.css',
 			array('version' => 'auto')
 		);
 
 		HTMLHelper::_(
-			'script', Uri::root() . 'plugins/editors/gutenberg/assets/editor/dist/js/joomla-gutenberg.js',
+			'script', Uri::root() . 'plugins/editors/gutenberg/assets/js/joomla-gutenberg-editor.js',
 			array('version' => 'auto'),
 			array('defer' => true)
 		);

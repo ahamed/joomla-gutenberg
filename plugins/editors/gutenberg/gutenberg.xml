@@ -12,8 +12,9 @@
 	<files>
 		<filename plugin="gutenberg">gutenberg.php</filename>
 		<folder>assets</folder>
-		<folder>language</folder>
 		<folder>fields</folder>
+		<folder>language</folder>
+		<folder>layouts</folder>
 	</files>
 
 	<languages folder="language">
